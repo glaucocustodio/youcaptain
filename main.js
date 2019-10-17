@@ -2,10 +2,18 @@ var runSpatial = function(){
   SpatialNavigation.makeFocusable();
   SpatialNavigation.focus('initial');
 
-  document.querySelector('ytd-browse, ytd-watch-next-secondary-results-renderer').addEventListener("DOMNodeInserted", function(event) {
+  var focusDOM = function(event) {
     SpatialNavigation.makeFocusable();
-  });
+  }
+
+  var query = document.querySelector('ytd-browse, ytd-watch-next-secondary-results-renderer');
+  query.addEventListener("DOMNodeInserted", focusDOM);
 }
+
+// page back
+window.addEventListener('popstate', function(event) {
+  runSpatial()
+});
 
 document.addEventListener('transitionend', function(e) {
   // YT's transition of page
