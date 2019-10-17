@@ -1,0 +1,8 @@
+:focus {
+  outline: 6px solid red;
+  /*box-shadow: 10px 3px 5px 0px rgba(0,0,0,0.75);*/
+  opacity: 1;
+}
+body ytd-thumbnail {
+  opacity: 0.6;
+}
