@@ -1,8 +1,15 @@
 :focus {
-  outline: 6px solid red;
-  /*box-shadow: 10px 3px 5px 0px rgba(0,0,0,0.75);*/
+  outline: 4px solid red;
   opacity: 1;
 }
-body ytd-thumbnail {
-  opacity: 0.6;
+ytd-grid-video-renderer, ytd-compact-video-renderer, ytd-video-renderer {
+  opacity: 0.7;
+}
+
+.ytd-shelf-renderer ytd-grid-video-renderer:focus {
+  padding-right: 0 !important;
+}
+
+#items.yt-horizontal-list-renderer ytd-grid-video-renderer:focus {
+  margin-right: 4px;
 }
