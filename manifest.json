@@ -11,6 +11,7 @@
      "js": ["content_script.js"]
    }
   ],
+  "options_page": "options.html",
   "web_accessible_resources": [
     "spatial_navigation.js","main.js"
   ],
