@@ -37,10 +37,8 @@ var setFocus = function(){
     var video = document.querySelector('video');
     var videoActive = video && video.src != "";
     if(videoActive){
-      console.log('video');
       SpatialNavigation.focus('ytd-player');
     } else {
-      console.log('n video');
       SpatialNavigation.focus('yc-initial');
     }
   }
