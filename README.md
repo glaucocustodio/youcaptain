@@ -6,7 +6,7 @@ A simple Chrome extension that enables keyboard navigation on YouTube.
 
 ## Why?
 
-I used to be a heavy user of the [discontinued youtube.com/leanback](https://github.com/codyogden/killedbygoogle/issues/590). Now it's gone, I needed to find a way to navigate on YouTube by just using my mini keyboard.
+I used to be a heavy user of the [discontinued youtube.com/leanback](https://github.com/codyogden/killedbygoogle/issues/590). Now it's gone, I needed to find a way to navigate on YouTube by just using my <a href="https://www.amazon.com/WOSUNG-Wireless-Keyboard-Android-Raspberry/dp/B01C2O4PG6?ref_=fsclp_pl_dp_9">mini keyboard</a>.
 
 ## Shortcuts
 
