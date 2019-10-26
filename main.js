@@ -52,9 +52,10 @@ window.addEventListener('load', function() {
     var letter_y = 89;
     var letter_h = 72;
     var backspace = 8;
+    var isCommentInputBox = document.activeElement.id == "contenteditable-root";
 
-    // do nothing if element in focus is INPUT
-    if (document.activeElement.tagName == 'INPUT') {
+    // do nothing if:
+    if (document.activeElement.tagName == 'INPUT' || isCommentInputBox) {
       console.log('nothing');
       return;
     }

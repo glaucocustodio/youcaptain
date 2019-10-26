@@ -1,4 +1,4 @@
-# <img src="icon48.png" width="30"> YouCaptain
+# <img src="icon48.png" width="30"> YouCaptain <img src="https://img.shields.io/github/v/release/glaucocustodio/youcaptain">
 
 A simple Chrome extension that enables keyboard navigation on YouTube.
 
@@ -28,6 +28,8 @@ This extension is not available on Chrome Web Store as I would have to pay a $5 
 - Click on the "Load unpacked" button and select the source code you just downloaded.
 
 Note: extensions installed as unpacked aren't updated automatically. To update the extension you should download it and install as unpacked again.
+
+Check the [releases page](https://github.com/glaucocustodio/youcaptain/releases) for new versions.
 
 ## Acknowledgment
 
