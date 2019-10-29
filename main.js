@@ -13,6 +13,13 @@
   });
 */
 
+document.addEventListener('fullscreenchange', function(e){
+  // exit fullscreen
+  if (!document.fullscreenElement) {
+    runSpatial();
+  }
+});
+
 var runSpatial = function(){
   SpatialNavigation.makeFocusable();
   setFocus();
@@ -56,7 +63,6 @@ window.addEventListener('load', function() {
 
     // do nothing if:
     if (document.activeElement.tagName == 'INPUT' || isCommentInputBox) {
-      console.log('nothing');
       return;
     }
 
