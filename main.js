@@ -45,6 +45,13 @@ var setFocus = function(){
     var videoActive = video && video.src != "";
     if(videoActive){
       SpatialNavigation.focus('ytd-player');
+
+      // hack for Firefox
+      if(document.activeElement.tagName == 'BODY') {
+        setTimeout(function(){
+          check();
+        }, 300);
+      }
     } else {
       SpatialNavigation.focus('yc-initial');
     }

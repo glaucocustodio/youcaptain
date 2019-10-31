@@ -1,6 +1,6 @@
 # <img src="icon48.png" width="30"> YouCaptain <img src="https://img.shields.io/github/v/release/glaucocustodio/youcaptain">
 
-A simple Chrome extension that enables keyboard navigation on YouTube.
+A simple browser extension that enables keyboard navigation on YouTube.
 
 ![demo.gif](https://raw.githubusercontent.com/glaucocustodio/youcaptain/master/demo.gif)
 
@@ -19,13 +19,21 @@ I've set up some shortcuts to ease my life, the bad news is that they aren't con
 - `u`: focus on video player if a video is being played, otherwise, focus on first video of the list
 - `y`: go to home page (/)
 
+## Compatibility
+
+This extension must work in any browser compatible with the [extension API](https://developer.chrome.com/extensions) or [WebExtensions API](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions). I've tested it on the following browsers:
+
+- Google Chrome
+- Firefox Developer Edition
+- Brave Browser
+
 ## Installation
 
-This extension is not available on Chrome Web Store as I would have to pay a $5 fee to create a developer account. But you can install it by yourself on Google Chrome or any Chromium-based browsers (e.g. Brave, Opera, Vivaldi etc) by following the steps below:
+This extension is not available on Chrome Web Store as I would have to pay a $5 fee to create a developer account. You can install it by yourself anyway by following the steps below:
 
 - Grab a copy of the source code either by cloning this repository or by downloading and extracting the zipped source. You can download zip archive by opening the project page on GitHub and clicking on the "Download" button.
-- Next, open the "Extensions" page (chrome://extensions/) in the browser and turn on the "Developer mode".
-- Click on the "Load unpacked" button and select the source code you just downloaded.
+- Next, open the "Extensions" page (`chrome://extensions/` or `about:debugging` on Firefox) in the browser and turn on the "Developer mode".
+- Click on the "Load unpacked"/"Load Temporary Add-on" button and select the source code you just downloaded.
 
 Note: extensions installed as unpacked aren't updated automatically. To update the extension you should download it and install as unpacked again.
 

@@ -1,6 +1,6 @@
 {
   "name": "YouCaptain",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Enables keyboard navigation on YouTube",
   "manifest_version": 2,
   "content_scripts": [
