@@ -29,11 +29,17 @@ This extension must work in any browser compatible with the [extension API](http
 
 ## Installation
 
+### Firefox
+
+https://addons.mozilla.org/addon/youcaptain/
+
+### Other browsers
+
 This extension is not available on Chrome Web Store as I would have to pay a $5 fee to create a developer account. You can install it by yourself anyway by following the steps below:
 
 - Grab a copy of the source code either by cloning this repository or by downloading and extracting the zipped source. You can download zip archive by opening the project page on GitHub and clicking on the "Download" button.
-- Next, open the "Extensions" page (`chrome://extensions/` or `about:debugging` on Firefox) in the browser and turn on the "Developer mode".
-- Click on the "Load unpacked"/"Load Temporary Add-on" button and select the source code you just downloaded.
+- Next, open the "Extensions" page (`chrome://extensions/`) in the browser and turn on the "Developer mode".
+- Click on the "Load unpacked" button and select the source code you just downloaded.
 
 Note: extensions installed as unpacked aren't updated automatically. To update the extension you should download it and install as unpacked again.
 

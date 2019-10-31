@@ -3,6 +3,7 @@
   "version": "0.0.4",
   "description": "Enables keyboard navigation on YouTube",
   "manifest_version": 2,
+  "homepage_url": "https://github.com/glaucocustodio/youcaptain",
   "content_scripts": [
    {
      "matches": ["*://*.youtube.com/*"],
