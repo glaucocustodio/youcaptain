@@ -12,9 +12,14 @@
      "js": ["content_script.js"]
    }
   ],
-  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html"
+  },
   "web_accessible_resources": [
     "spatial_navigation.js","main.js"
+  ],
+  "permissions": [
+    "storage"
   ],
   "icons": {
     "16": "icon16.png",

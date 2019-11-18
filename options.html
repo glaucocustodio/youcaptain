@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head><title>YouCaptain Shortcuts</title></head>
+<head>
+  <title>YouCaptain Shortcuts</title>
+  <script src="options.js"></script>
+</head>
 <style>
   body {
-    font-size: 1.4em;
+    font-size: 1.3em;
     padding: 0 30px;
   }
   code {
-    font-size: 1.5em;
+    font-size: 1.4em;
   }
 </style>
 <body>
   <h1>YouCaptain</h1>
+
+  <h2>Options</h2>
+
+  <form id="optionsForm">
+    <p>
+      <input type="checkbox" id="liked_video">
+      <label for="liked_video">Highlight current playing video if it's been liked</label>
+    </p>
+
+    <input type="submit" value="Save">
+  </form>
+
   <h2>Shortcuts</h2>
   <p>
     <code>backspace</code>: go to previous page (history back)
