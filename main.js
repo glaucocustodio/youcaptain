@@ -25,9 +25,22 @@ var runSpatial = function(){
   setFocus();
 }
 
+var markLikedVideo = function(){
+  var likeButton = document.querySelectorAll('#top-level-buttons ytd-toggle-button-renderer')[0];
+  var likeButtonActive = likeButton && likeButton.classList.contains('style-default-active');
+
+  if(likeButtonActive){
+    document.querySelector('ytd-player').style.borderLeft = 'solid 2px #3ea6ff';
+  } else {
+    document.querySelector('ytd-player').style.borderLeft = '';
+  }
+}
+
 // mark new videos (loaded via ajax) as focusable
 setInterval(function(){
   SpatialNavigation.makeFocusable();
+
+  markLikedVideo();
 }, 1000);
 
 // when page back is triggered
@@ -112,7 +125,7 @@ window.addEventListener('load', function() {
   */
   SpatialNavigation.add({
     id: 'yc-initial',
-    selector: 'ytd-rich-grid-video-renderer, ytd-grid-video-renderer, ytd-video-renderer, ytd-compact-video-renderer, ytd-player, ytd-guide-entry-renderer, .ytd-video-primary-info-renderer ytd-toggle-button-renderer, ytd-video-owner-renderer, .paper-tab, #subscribe-button paper-button, yt-confirm-dialog-renderer yt-button-renderer, yt-confirm-dialog-renderer, ytd-mini-guide-entry-renderer, ytd-channel-renderer, paper-button.ytd-expander, ytd-comment-renderer',
+    selector: 'ytd-rich-grid-video-renderer, ytd-grid-video-renderer, ytd-video-renderer, ytd-compact-video-renderer, ytd-player, ytd-guide-entry-renderer, .ytd-video-primary-info-renderer ytd-toggle-button-renderer, ytd-video-owner-renderer, .paper-tab, #subscribe-button paper-button, yt-confirm-dialog-renderer yt-button-renderer, yt-confirm-dialog-renderer, ytd-mini-guide-entry-renderer, ytd-channel-renderer, paper-button.ytd-expander, ytd-comment-renderer, #description a',
   })
   // adds another section to avoid focus on the YT logo when accessing the home page
   SpatialNavigation.add({
