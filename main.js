@@ -47,6 +47,7 @@ var setFocus = function(){
     var videoActive = video && video.src != "";
     if(videoActive){
       SpatialNavigation.focus('ytd-player');
+      window.scrollTo(0, 0);
 
       // hack for Firefox
       if(document.activeElement.tagName == 'BODY') {
