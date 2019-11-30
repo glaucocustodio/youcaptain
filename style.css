@@ -2,8 +2,8 @@
   outline: 4px solid red;
   opacity: 1;
 }
-ytd-grid-video-renderer, ytd-compact-video-renderer, ytd-video-renderer {
-  opacity: 0.7;
+ytd-grid-video-renderer, ytd-compact-video-renderer, ytd-video-renderer, ytd-rich-grid-video-renderer {
+  opacity: 0.75;
 }
 
 .ytd-shelf-renderer ytd-grid-video-renderer:focus {

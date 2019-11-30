@@ -1,18 +1,3 @@
-/*
-  document.addEventListener('transitionend', function(e) {
-    // YT's transition of page
-    if(e.target.id == 'progress') {
-      runSpatial()
-    }
-  });
-
-  document.querySelector('ytd-app').addEventListener('yt-page-data-updated', function(e){
-  })
-
-  window.addEventListener('pageshow', function() {
-  });
-*/
-
 document.addEventListener('fullscreenchange', function(e){
   // exit fullscreen
   if (!document.fullscreenElement) {
@@ -46,6 +31,10 @@ setInterval(function(){
 // when page back is triggered
 window.addEventListener('popstate', function(event) {
   runSpatial()
+  // force focus
+  setTimeout(function(){
+    setFocus();
+  }, 200)
 });
 
 document.querySelector('ytd-app').addEventListener('yt-navigate-finish', function(e){
