@@ -18,6 +18,8 @@ I've set up some shortcuts to ease my life, the bad news is that they aren't con
 - `s`: focus on search field
 - `u`: focus on video player if a video is being played, otherwise, focus on first video of the list
 - `y`: go to home page (/)
+- `f1`: zoom out
+- `f2`: zoom in
 
 ## Compatibility
 

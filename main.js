@@ -69,13 +69,14 @@ window.addEventListener('load', function() {
     var letter_y = 89;
     var letter_h = 72;
     var backspace = 8;
+    var f1 = 112;
+    var f2 = 113;
     var isCommentInputBox = document.activeElement.id == "contenteditable-root";
 
     // do nothing if:
     if (document.activeElement.tagName == 'INPUT' || isCommentInputBox) {
       return;
     }
-
     if (event.keyCode == letter_u){
       setFocus();
     } else if (event.keyCode == letter_s){
@@ -88,6 +89,11 @@ window.addEventListener('load', function() {
       likeButton && likeButton.click();
     } else if (event.keyCode == backspace){
       window.history.back();
+    } else if (event.keyCode == f1) {
+      // send message to content_script
+      window.postMessage({ command: 'zoom_out', type: 'FROM_PAGE' })
+    } else if (event.keyCode == f2) {
+      window.postMessage({ command: 'zoom_in', type: 'FROM_PAGE' })
     }
   });
 
