@@ -5,9 +5,9 @@ document.addEventListener('fullscreenchange', function(e){
   }
 });
 
-var runSpatial = function(){
+var runSpatial = function(turnFullscreen = false){
   SpatialNavigation.makeFocusable();
-  setFocus();
+  setFocus(turnFullscreen);
 }
 
 var markLikedVideo = function(){
@@ -17,7 +17,10 @@ var markLikedVideo = function(){
   if(likeButtonActive){
     document.querySelector('ytd-player').style.borderLeft = 'solid 2px #3ea6ff';
   } else {
-    document.querySelector('ytd-player').style.borderLeft = '';
+    player = document.querySelector('ytd-player')
+    if(player) {
+      player.style.borderLeft = '';
+    }
   }
 }
 
@@ -38,16 +41,19 @@ window.addEventListener('popstate', function(event) {
 });
 
 document.querySelector('ytd-app').addEventListener('yt-navigate-finish', function(e){
-  runSpatial()
+  runSpatial(true)
 });
 
-var setFocus = function(){
+var setFocus = function(turnFullscreen = false){
   var check = function(){
     var video = document.querySelector('video');
     var videoActive = video && video.src != "";
     if(videoActive){
       SpatialNavigation.focus('ytd-player');
       window.scrollTo(0, 0);
+      if(turnFullscreen){
+        document.documentElement.requestFullscreen();
+      }
 
       // hack for Firefox
       if(document.activeElement.tagName == 'BODY') {
