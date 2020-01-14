@@ -103,6 +103,11 @@ window.addEventListener('load', function() {
     }
   });
 
+  window.addEventListener('sn:focused', function(event){
+    // keep focused element on center (avoid showing just part of a video's thumbnail when walking through a list of videos)
+    event.srcElement.scrollIntoView({block: "center"})
+  })
+
   window.addEventListener('sn:enter-down', function(event){
     var link = event.target.querySelector('a.yt-simple-endpoint')
     if(link) {
