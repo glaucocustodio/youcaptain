@@ -15,9 +15,10 @@ var markLikedVideo = function(){
   var likeButtonActive = likeButton && likeButton.classList.contains('style-default-active');
 
   if(likeButtonActive){
-    document.querySelector('ytd-player').style.borderLeft = 'solid 2px #3ea6ff';
+    document.querySelector('#player-container').style.borderLeft = 'solid 2px red';
   } else {
-    player = document.querySelector('ytd-player')
+    player = document.querySelector('#player-container')
+
     if(player) {
       player.style.borderLeft = '';
     }
