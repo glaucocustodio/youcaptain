@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head><title>YouCaptain Shortcuts</title></head>
+<head>
+  <meta charset="UTF-8">
+  <title>YouCaptain Shortcuts</title>
+  <script src="options.js"></script>
+</head>
 <style>
   body {
     font-size: 1.4em;
@@ -9,9 +13,32 @@
   code {
     font-size: 1.5em;
   }
+  .feedback {
+    background-color: #a0dda0;
+    padding: 12px;
+    border-radius: 4px;
+    display: none;
+  }
+  .visible {
+    display: block;
+  }
 </style>
 <body>
   <h1>YouCaptain</h1>
+
+  <form id="optionsForm">
+    <p class="feedback"></p>
+    <p>
+      <input id="enterFullscreen" type="checkbox">
+      <label for="enterFullscreen">Enter fullscreen when playing a video</label>
+    </p>
+    <p>
+      <input id="playAudioOnFocus" type="checkbox">
+      <label for="playAudioOnFocus">Play audio on focus</label>
+    </p>
+    <input type="submit" value="Save">
+  </form>
+
   <h2>Shortcuts</h2>
   <p>
     <code>backspace</code>: go to previous page (history back)

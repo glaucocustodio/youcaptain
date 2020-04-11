@@ -52,9 +52,14 @@ const setDarkMode = function() {
   }
 }
 
+window.addEventListener("ExtensionOptionsRead", function(event) {
+  window.extensionOptions = event.detail
+})
+
 document.querySelector('ytd-app').addEventListener('yt-navigate-finish', function(e){
   runSpatial(true)
 });
+
 
 var setFocus = function(turnFullscreen = false){
   var check = function(){
@@ -63,7 +68,7 @@ var setFocus = function(turnFullscreen = false){
     if(videoActive){
       SpatialNavigation.focus('ytd-player');
       window.scrollTo(0, 0);
-      if(turnFullscreen){
+      if(turnFullscreen && window.extensionOptions.enterFullscreen){
         document.documentElement.requestFullscreen();
       }
 
@@ -120,7 +125,10 @@ window.addEventListener('load', function() {
   window.addEventListener('sn:focused', function(event){
     // keep focused element on center (avoid showing just part of a video's thumbnail when walking through a list of videos)
     event.srcElement.scrollIntoView({block: "center"})
-    window.postMessage({ command: 'play_button_audio', type: 'TO_CONTENT_SCRIPT' })
+
+    if (window.extensionOptions && window.extensionOptions.playAudioOnFocus) {
+      window.postMessage({ command: 'play_button_audio', type: 'TO_CONTENT_SCRIPT' })
+    }
   })
 
   window.addEventListener('sn:enter-down', function(event){

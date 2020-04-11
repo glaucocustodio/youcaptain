@@ -12,7 +12,9 @@
      "js": ["content_script.js"]
     }
   ],
-  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html"
+  },
   "web_accessible_resources": [
     "spatial_navigation.js","main.js", "button.wav"
   ],
@@ -20,7 +22,7 @@
     "scripts": ["background.js"],
     "persistent": false
   },
-  "permissions": ["tabs"],
+  "permissions": ["tabs", "storage"],
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",
