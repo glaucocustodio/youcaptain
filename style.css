@@ -1,9 +1,33 @@
 :focus {
   outline: 4px solid red;
-  opacity: 1;
 }
-ytd-grid-video-renderer, ytd-compact-video-renderer, ytd-video-renderer, ytd-rich-grid-video-renderer {
+
+.dark-mode-on ytd-rich-grid-video-renderer:focus {
+  background: #fff;
+  margin-top: -0.25rem;
+}
+
+.dark-mode-on ytd-rich-grid-video-renderer:focus #video-title {
+  color: #000 !important;
+}
+
+.dark-mode-on ytd-rich-grid-video-renderer:focus yt-formatted-string[has-link-only_]:not([force-default-style]) .style-scope {
+  color: #5d5d5d !important;
+}
+
+.dark-mode-off ytd-grid-video-renderer,
+.dark-mode-off ytd-compact-video-renderer,
+.dark-mode-off ytd-video-renderer,
+.dark-mode-off ytd-rich-grid-video-renderer {
   opacity: 0.75;
+}
+
+.dark-mode-off ytd-rich-grid-video-renderer:focus {
+  margin-top: -0.25rem;
+}
+
+.dark-mode-off :focus {
+  opacity: 1;
 }
 
 .ytd-shelf-renderer ytd-grid-video-renderer:focus {

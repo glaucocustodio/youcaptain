@@ -14,7 +14,7 @@
   ],
   "options_page": "options.html",
   "web_accessible_resources": [
-    "spatial_navigation.js","main.js"
+    "spatial_navigation.js","main.js", "button.wav"
   ],
   "background": {
     "scripts": ["background.js"],

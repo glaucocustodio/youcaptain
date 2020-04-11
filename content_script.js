@@ -7,11 +7,16 @@ window.addEventListener("message", function(event) {
   if (event.source != window)
     return;
 
-  if (event.data.type && (event.data.type == "FROM_PAGE")) {
-    // send message to background script
-    chrome.runtime.sendMessage({
-      command: event.data.command
-    });
+  if (event.data.type) {
+    if (event.data.type == "TO_BACKGROUND") {
+      // send message to background script
+      chrome.runtime.sendMessage({
+        command: event.data.command
+      });
+    } else if (event.data.command == 'play_button_audio') {
+      var audio = new Audio(chrome.extension.getURL('button.wav'));
+      audio.play();
+    }
   }
 }, false)
 

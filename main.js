@@ -41,6 +41,17 @@ window.addEventListener('popstate', function(event) {
   }, 200)
 });
 
+const setDarkMode = function() {
+  const darkMode = document.querySelector('html').getAttribute('dark')
+  if (darkMode) {
+    document.querySelector('body').classList.add('dark-mode-on')
+    document.querySelector('body').classList.remove('dark-mode-off')
+  } else {
+    document.querySelector('body').classList.add('dark-mode-off')
+    document.querySelector('body').classList.remove('dark-mode-on')
+  }
+}
+
 document.querySelector('ytd-app').addEventListener('yt-navigate-finish', function(e){
   runSpatial(true)
 });
@@ -70,6 +81,8 @@ var setFocus = function(turnFullscreen = false){
 }
 
 window.addEventListener('load', function() {
+  setDarkMode()
+
   window.addEventListener("keydown", function(event){
     var letter_u = 85;
     var letter_s = 83;
@@ -98,15 +111,16 @@ window.addEventListener('load', function() {
       window.history.back();
     } else if (event.keyCode == f1) {
       // send message to content_script
-      window.postMessage({ command: 'zoom_out', type: 'FROM_PAGE' })
+      window.postMessage({ command: 'zoom_out', type: 'TO_BACKGROUND' })
     } else if (event.keyCode == f2) {
-      window.postMessage({ command: 'zoom_in', type: 'FROM_PAGE' })
+      window.postMessage({ command: 'zoom_in', type: 'TO_BACKGROUND' })
     }
   });
 
   window.addEventListener('sn:focused', function(event){
     // keep focused element on center (avoid showing just part of a video's thumbnail when walking through a list of videos)
     event.srcElement.scrollIntoView({block: "center"})
+    window.postMessage({ command: 'play_button_audio', type: 'TO_CONTENT_SCRIPT' })
   })
 
   window.addEventListener('sn:enter-down', function(event){
@@ -130,6 +144,7 @@ window.addEventListener('load', function() {
     channel box on search results page: ytd-channel-renderer
     show more / less button: paper-button.ytd-expander
     comment box: ytd-comment-renderer
+    .paper-tab: tab link on subscription page
   */
   SpatialNavigation.add({
     id: 'yc-initial',
