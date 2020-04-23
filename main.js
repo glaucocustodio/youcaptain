@@ -93,6 +93,7 @@ window.addEventListener('load', function() {
     var letter_s = 83;
     var letter_y = 89;
     var letter_h = 72;
+    var letter_w = 87;
     var backspace = 8;
     var f1 = 112;
     var f2 = 113;
@@ -109,6 +110,8 @@ window.addEventListener('load', function() {
       event.preventDefault();
     } else if (event.keyCode == letter_y){
       window.location = '/';
+    } else if (event.keyCode == letter_w){
+      window.location = '/playlist?list=WL';
     } else if (event.keyCode == letter_h){
       var likeButton = document.querySelector('ytd-video-primary-info-renderer ytd-toggle-button-renderer:first-child');
       likeButton && likeButton.click();
@@ -153,10 +156,11 @@ window.addEventListener('load', function() {
     show more / less button: paper-button.ytd-expander
     comment box: ytd-comment-renderer
     .paper-tab: tab link on subscription page
+    #content.ytd-playlist-video-renderer: watch later items
   */
   SpatialNavigation.add({
     id: 'yc-initial',
-    selector: 'ytd-rich-grid-video-renderer, ytd-grid-video-renderer, ytd-video-renderer, ytd-compact-video-renderer, ytd-player, ytd-guide-entry-renderer, .ytd-video-primary-info-renderer ytd-toggle-button-renderer, ytd-video-owner-renderer, .paper-tab, #subscribe-button paper-button, yt-confirm-dialog-renderer yt-button-renderer, yt-confirm-dialog-renderer, ytd-mini-guide-entry-renderer, ytd-channel-renderer, paper-button.ytd-expander, ytd-comment-renderer, #description a',
+    selector: 'ytd-rich-grid-video-renderer, ytd-grid-video-renderer, ytd-video-renderer, ytd-compact-video-renderer, ytd-player, ytd-guide-entry-renderer, .ytd-video-primary-info-renderer ytd-toggle-button-renderer, ytd-video-owner-renderer, .paper-tab, #subscribe-button paper-button, yt-confirm-dialog-renderer yt-button-renderer, yt-confirm-dialog-renderer, ytd-mini-guide-entry-renderer, ytd-channel-renderer, paper-button.ytd-expander, ytd-comment-renderer, #description a, #content.ytd-playlist-video-renderer',
   })
   // adds another section to avoid focus on the YT logo when accessing the home page
   SpatialNavigation.add({
