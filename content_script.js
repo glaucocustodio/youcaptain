@@ -1,15 +1,5 @@
 const defaultPreferences = { enterFullscreen: true, playAudioOnFocus: true }
 
-chrome.storage.local.get(defaultPreferences, function(result) {
-  if(Object.keys(result).length == 0) {
-    chrome.storage.local.set(result, function(){
-      loadMain();
-    });
-  } else {
-    loadMain();
-  }
-})
-
 /*
    receive message from web resource
    this listener could be removed if we could send messages directly from web resource to background scripts
@@ -40,45 +30,43 @@ s.onload = function() {
     s.parentNode ? s.parentNode.removeChild(s) : null;
 };
 
-const loadMain = function() {
-  var s = document.createElement('script');
-  s.src = chrome.extension.getURL('main.js');
-  (document.head||document.documentElement).appendChild(s);
-  s.onload = function() {
-      s.parentNode ? s.parentNode.removeChild(s) : null;
+var s = document.createElement('script');
+s.src = chrome.extension.getURL('main.js');
+(document.head||document.documentElement).appendChild(s);
+s.onload = function() {
+    s.parentNode ? s.parentNode.removeChild(s) : null;
 
-      // Injected scripts (like main.js) don't have access to the storage api, so I do this
-      // to send saved options as a custom event to it
-      chrome.storage.local.get(defaultPreferences, function(result) {
+    // Injected scripts (like main.js) don't have access to the storage api, so I do this
+    // to send saved options as a custom event to it
+    chrome.storage.local.get(defaultPreferences, function(result) {
+      let detail;
+      if (typeof cloneInto === "function") {
+        // Firefox requires to use cloneInto otherwise it will deny access to the attributes
+        detail = cloneInto(result, document.defaultView)
+      } else {
+        detail = result
+      }
+
+      var event = new CustomEvent("ExtensionOptionsRead", { detail: detail });
+      window.dispatchEvent(event);
+    });
+
+    // once a value is changed another event is sent
+    chrome.storage.onChanged.addListener(function(changes, namespace) {
+      if(Object.keys(changes).some(item => Object.keys(defaultPreferences).includes(item))) {
+        message = {}
+        Object.entries(changes).forEach(([key, value]) => {
+          message[key] = value.newValue
+        });
         let detail;
         if (typeof cloneInto === "function") {
           // Firefox requires to use cloneInto otherwise it will deny access to the attributes
-          detail = cloneInto(result, document.defaultView)
+          detail = cloneInto(message, document.defaultView)
         } else {
-          detail = result
+          detail = message
         }
-
         var event = new CustomEvent("ExtensionOptionsRead", { detail: detail });
         window.dispatchEvent(event);
-      });
-
-      // once a value is changed another event is sent
-      chrome.storage.onChanged.addListener(function(changes, namespace) {
-        if(Object.keys(changes).some(item => Object.keys(defaultPreferences).includes(item))) {
-          message = {}
-          Object.entries(changes).forEach(([key, value]) => {
-            message[key] = value.newValue
-          });
-          let detail;
-          if (typeof cloneInto === "function") {
-            // Firefox requires to use cloneInto otherwise it will deny access to the attributes
-            detail = cloneInto(message, document.defaultView)
-          } else {
-            detail = message
-          }
-          var event = new CustomEvent("ExtensionOptionsRead", { detail: detail });
-          window.dispatchEvent(event);
-        }
-      });
-  };
-}
+      }
+    });
+};
