@@ -1,5 +1,8 @@
 # Changelog
 
+### v0.0.10 (24/04/2020)
+- Fix setting of default preferences
+
 ### v0.0.9 (23/04/2020)
 - Add shortcut to visit the watch later playlist (w)
 - Add two editable settings (enterFullscreen and playAudioOnFocus) to the options page
