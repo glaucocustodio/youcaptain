@@ -71,24 +71,4 @@ s.onload = function() {
     });
 };
 
-// this event has the purpose of cancelling the propagation of the keydown event
-// when the following conditions are true
-// this is necessary to cancel the default YT ArrowRight and ArrowLeft shortcuts when watching a video
-// https://stackoverflow.com/a/35611393/1519240
-document.addEventListener("keydown", function (event) {
-  let arrowRight = 39
-  let arrowLeft = 37
-  let watchPage = document.querySelector('ytd-app').attributes['is-watch-page']
-  if (watchPage) {
-    if (event.keyCode == arrowRight) {
-      event.stopPropagation();
-      var event = new CustomEvent("MoveRight", { detail: null });
-      window.dispatchEvent(event);
-    } else if (event.keyCode == arrowLeft) {
-      event.stopPropagation();
-      var event = new CustomEvent("MoveLeft", { detail: null });
-      window.dispatchEvent(event);
-    }
-  }
-}, true);
 

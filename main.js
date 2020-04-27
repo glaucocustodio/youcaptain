@@ -52,16 +52,29 @@ const setDarkMode = function() {
   }
 }
 
+// this event has the purpose of cancelling the propagation of the keydown event
+// when the following conditions are true
+// this is necessary to cancel the default YT ArrowRight and ArrowLeft shortcuts when watching a video
+// https://stackoverflow.com/a/35611393/1519240
+document.addEventListener("keydown", function (event) {
+  let arrowRight = 39
+  let arrowLeft = 37
+  let watchPage = document.querySelector('ytd-app').attributes['is-watch-page']
+  if (watchPage) {
+    if (event.keyCode == arrowRight) {
+      event.stopPropagation();
+      SpatialNavigation.move('right')
+    } else if (event.keyCode == arrowLeft) {
+      event.stopPropagation();
+      SpatialNavigation.move('left')
+
+    }
+  }
+}, true);
+
+
 window.addEventListener("ExtensionOptionsRead", function(event) {
   window.extensionOptions = event.detail
-})
-
-window.addEventListener("MoveRight", function(event) {
-  SpatialNavigation.move('right')
-})
-
-window.addEventListener("MoveLeft", function(event) {
-  SpatialNavigation.move('left')
 })
 
 document.querySelector('ytd-app').addEventListener('yt-navigate-finish', function(e){
