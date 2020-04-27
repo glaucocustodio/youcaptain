@@ -56,6 +56,14 @@ window.addEventListener("ExtensionOptionsRead", function(event) {
   window.extensionOptions = event.detail
 })
 
+window.addEventListener("MoveRight", function(event) {
+  SpatialNavigation.move('right')
+})
+
+window.addEventListener("MoveLeft", function(event) {
+  SpatialNavigation.move('left')
+})
+
 document.querySelector('ytd-app').addEventListener('yt-navigate-finish', function(e){
   runSpatial(true)
 });
