@@ -60,7 +60,8 @@ document.addEventListener("keydown", function (event) {
   let arrowRight = 39
   let arrowLeft = 37
   let watchPage = document.querySelector('ytd-app').attributes['is-watch-page']
-  if (watchPage) {
+
+  if (watchPage && document.fullscreenElement == null) {
     if (event.keyCode == arrowRight) {
       event.stopPropagation();
       SpatialNavigation.move('right')
