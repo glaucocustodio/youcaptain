@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.0.11 (unreleased)
+- Cancel default arrow (left and right) shortcuts when playing a video not in fullscreen
+- Disable focus on links of the description
+
 ### v0.0.10 (24/04/2020)
 - Fix setting of default preferences
 
