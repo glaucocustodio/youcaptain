@@ -60,8 +60,10 @@ document.addEventListener("keydown", function (event) {
   let arrowRight = 39
   let arrowLeft = 37
   let watchPage = document.querySelector('ytd-app').attributes['is-watch-page']
+  // YT's picture-in-picture
+  let miniPlayerActive = document.querySelector('ytd-app').attributes['miniplayer-active_'] !== undefined
 
-  if (watchPage && document.fullscreenElement == null) {
+  if ((miniPlayerActive || watchPage) && document.fullscreenElement == null) {
     if (event.keyCode == arrowRight) {
       event.stopPropagation();
       SpatialNavigation.move('right')
