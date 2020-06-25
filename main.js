@@ -84,7 +84,6 @@ document.querySelector('ytd-app').addEventListener('yt-navigate-finish', functio
   runSpatial(true)
 });
 
-
 var setFocus = function(turnFullscreen = false){
   var check = function(){
     var video = document.querySelector('video');
@@ -113,6 +112,7 @@ window.addEventListener('load', function() {
   setDarkMode()
 
   window.addEventListener("keydown", function(event){
+    var letter_o = 79;
     var letter_u = 85;
     var letter_s = 83;
     var letter_y = 89;
@@ -122,13 +122,22 @@ window.addEventListener('load', function() {
     var f1 = 112;
     var f2 = 113;
     var isCommentInputBox = document.activeElement.id == "contenteditable-root";
-
     // do nothing if:
     if (document.activeElement.tagName == 'INPUT' || isCommentInputBox) {
       return;
     }
     if (event.keyCode == letter_u){
       setFocus();
+    } else if (event.keyCode == letter_o){
+      // trigger this event to make the icons to appear
+      const mouseenterEvent = new Event('mouseenter');
+      event.target.dispatchEvent(mouseenterEvent);
+
+      event.target.querySelectorAll('ytd-thumbnail-overlay-toggle-button-renderer').forEach((current) => {
+        if(current.innerText == 'ADD TO QUEUE'){
+          current.querySelector('yt-icon').click()
+        }
+      })
     } else if (event.keyCode == letter_s){
       document.querySelector('#search-input input').focus()
       event.preventDefault();

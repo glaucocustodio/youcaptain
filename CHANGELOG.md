@@ -3,6 +3,7 @@
 ### v0.0.11 (unreleased)
 - Cancel default arrow (left and right) shortcuts when playing a video not in fullscreen and when miniplayer (picture-in-picture) is active
 - Disable focus on links of the description
+- Add shortcut to add current video to the queue (o)
 
 ### v0.0.10 (24/04/2020)
 - Fix setting of default preferences

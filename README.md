@@ -14,6 +14,7 @@ I've set up some shortcuts to ease my life, the bad news is that they aren't con
 
 - `backspace`: go to previous page (history back)
 - `enter`: left click
+- `o`: add video to the queue
 - `h`: like/dislike video
 - `s`: focus on search field
 - `u`: focus on video player if a video is being played, otherwise, focus on first video of the list
