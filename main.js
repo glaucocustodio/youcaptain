@@ -162,7 +162,7 @@ window.addEventListener('load', function() {
       event.target.dispatchEvent(mouseenterEvent);
 
       event.target.querySelectorAll('ytd-thumbnail-overlay-toggle-button-renderer').forEach((current) => {
-        if(current.innerText == 'ADD TO QUEUE'){
+        if(current.innerText == 'ADD TO QUEUE' || current.getAttribute('aria-label') == "Add to queue"){
           current.querySelector('yt-icon').click()
         }
       })
