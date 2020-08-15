@@ -52,35 +52,69 @@ const setDarkMode = function() {
   }
 }
 
-// this event has the purpose of cancelling the propagation of the keydown event
-// when the following conditions are true
-// this is necessary to cancel the default YT ArrowRight and ArrowLeft shortcuts when watching a video
-// https://stackoverflow.com/a/35611393/1519240
-document.addEventListener("keydown", function (event) {
+window.addEventListener("ExtensionOptionsRead", function(event) {
+  window.extensionOptions = event.detail
+})
+
+const defineMiniplayerSize = function(){
+  if(miniPlayer) {
+    miniPlayer.style.setProperty('--ytd-miniplayer-width', '175px')
+    miniPlayer.style.setProperty('height', '435px')
+    miniPlayer.style.setProperty('--ytd-miniplayer-height', '88px')
+  }
+}
+
+// change the miniplayer size when it gets enabled
+const miniPlayer = document.querySelector('ytd-miniplayer');
+var observer = new MutationObserver(function(mutations) {
+  mutations.forEach(function(mutation) {
+    if (mutation.type == "attributes" && mutation.attributeName == 'enabled') {
+      defineMiniplayerSize()
+    }
+  });
+});
+if (miniPlayer) {
+  observer.observe(miniPlayer, {
+    attributes: true //configure it to listen to attribute changes
+  });
+}
+
+const cancelArrowHandler = function (event) {
   let arrowRight = 39
   let arrowLeft = 37
   let watchPage = document.querySelector('ytd-app').attributes['is-watch-page']
   // YT's picture-in-picture
   let miniPlayerActive = document.querySelector('ytd-app').attributes['miniplayer-active_'] !== undefined
+  const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
+  const focusIfFirefox = function() {
+    // this is ugly
+    if (isFirefox) {
+      SpatialNavigation.focus('ytd-player');
+    }
+  }
   if ((miniPlayerActive || watchPage) && document.fullscreenElement == null) {
     if (event.keyCode == arrowRight) {
       event.stopPropagation();
-      SpatialNavigation.move('right')
+      SpatialNavigation.move('right');
     } else if (event.keyCode == arrowLeft) {
       event.stopPropagation();
+      // focusIfFirefox();
       SpatialNavigation.move('left')
-
     }
   }
-}, true);
-
-
-window.addEventListener("ExtensionOptionsRead", function(event) {
-  window.extensionOptions = event.detail
-})
+}
+const cancelArrowKeys = function() {
+  // this event has the purpose of cancelling the propagation of the keydown event
+  // when the following conditions are true
+  // this is necessary to cancel the default YT ArrowRight and ArrowLeft shortcuts when watching a video
+  // https://stackoverflow.com/a/35611393/1519240
+  document.addEventListener("keydown", cancelArrowHandler, true);
+}
 
 document.querySelector('ytd-app').addEventListener('yt-navigate-finish', function(e){
+  document.removeEventListener("keydown", cancelArrowHandler)
+  cancelArrowKeys()
   runSpatial(true)
 });
 
@@ -88,18 +122,11 @@ var setFocus = function(turnFullscreen = false){
   var check = function(){
     var video = document.querySelector('video');
     var videoActive = video && video.src != "";
-    if(videoActive){
+    if(videoActive && !miniPlayer){
       SpatialNavigation.focus('ytd-player');
       window.scrollTo(0, 0);
       if(turnFullscreen && window.extensionOptions.enterFullscreen){
         document.documentElement.requestFullscreen();
-      }
-
-      // hack for Firefox
-      if(document.activeElement.tagName == 'BODY') {
-        setTimeout(function(){
-          check();
-        }, 300);
       }
     } else {
       SpatialNavigation.focus('yc-initial');
@@ -110,6 +137,7 @@ var setFocus = function(turnFullscreen = false){
 
 window.addEventListener('load', function() {
   setDarkMode()
+  cancelArrowKeys()
 
   window.addEventListener("keydown", function(event){
     var letter_o = 79;
