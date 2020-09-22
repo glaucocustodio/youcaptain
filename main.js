@@ -210,7 +210,9 @@ window.addEventListener('load', function() {
 
   SpatialNavigation.init();
   /*
-    new video box (home page): ytd-rich-grid-video-renderer
+    playlist item in queue: ytd-playlist-panel-video-renderer
+    new video box (home page): ytd-rich-item-renderer
+    old video box (home page): ytd-rich-grid-video-renderer
     video box: ytd-grid-video-renderer, ytd-video-renderer, ytd-compact-video-renderer ou apenas ytd-thumbnail
     small screen side menu links (home, trending, subs, library): ytd-mini-guide-entry-renderer
     channel box on search results page: ytd-channel-renderer
@@ -221,7 +223,7 @@ window.addEventListener('load', function() {
   */
   SpatialNavigation.add({
     id: 'yc-initial',
-    selector: 'ytd-rich-grid-video-renderer, ytd-grid-video-renderer, ytd-video-renderer, ytd-compact-video-renderer, ytd-player, ytd-guide-entry-renderer, .ytd-video-primary-info-renderer ytd-toggle-button-renderer, ytd-video-owner-renderer, .paper-tab, #subscribe-button paper-button, yt-confirm-dialog-renderer yt-button-renderer, yt-confirm-dialog-renderer, ytd-mini-guide-entry-renderer, ytd-channel-renderer, paper-button.ytd-expander, ytd-comment-renderer, #content.ytd-playlist-video-renderer',
+    selector: 'ytd-rich-item-renderer, ytd-rich-grid-video-renderer, ytd-grid-video-renderer, ytd-video-renderer, ytd-compact-video-renderer, ytd-player, ytd-guide-entry-renderer, .ytd-video-primary-info-renderer ytd-toggle-button-renderer, ytd-video-owner-renderer, .paper-tab, #subscribe-button paper-button, yt-confirm-dialog-renderer yt-button-renderer, yt-confirm-dialog-renderer, ytd-mini-guide-entry-renderer, ytd-channel-renderer, paper-button.ytd-expander, ytd-comment-renderer, #content.ytd-playlist-video-renderer, ytd-playlist-panel-video-renderer'
   })
   // adds another section to avoid focus on the YT logo when accessing the home page
   SpatialNavigation.add({

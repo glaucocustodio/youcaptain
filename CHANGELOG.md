@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.0.12 (22/09/2020)
+- Add support to new home page html tag
+- Allow navigation in playlist items
+
 ### v0.0.11 (28/08/2020)
 - Cancel default arrow (left and right) shortcuts when playing a video not in fullscreen and when miniplayer (picture-in-picture) is active
 - Disable focus on links of the description
