@@ -59,7 +59,7 @@ window.addEventListener("ExtensionOptionsRead", function(event) {
 const defineMiniplayerSize = function(){
   if(miniPlayer) {
     miniPlayer.style.setProperty('--ytd-miniplayer-width', '175px')
-    miniPlayer.style.setProperty('height', '435px')
+    miniPlayer.style.setProperty('height', '535px')
     miniPlayer.style.setProperty('--ytd-miniplayer-height', '88px')
   }
 }
@@ -174,7 +174,7 @@ window.addEventListener('load', function() {
     } else if (event.keyCode == letter_w){
       window.location = '/playlist?list=WL';
     } else if (event.keyCode == letter_h){
-      var likeButton = document.querySelector('ytd-video-primary-info-renderer ytd-toggle-button-renderer:first-child');
+      let likeButton = document.querySelector('ytd-video-primary-info-renderer ytd-toggle-button-renderer:first-child');
       likeButton && likeButton.click();
     } else if (event.keyCode == backspace){
       window.history.back();
