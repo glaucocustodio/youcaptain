@@ -174,7 +174,7 @@ window.addEventListener('load', function() {
     } else if (event.keyCode == letter_w){
       window.location = '/playlist?list=WL';
     } else if (event.keyCode == letter_h){
-      let likeButton = document.querySelector('ytd-video-primary-info-renderer ytd-toggle-button-renderer:first-child');
+      let likeButton = document.querySelector('#segmented-like-button yt-button-shape button');
       likeButton && likeButton.click();
     } else if (event.keyCode == backspace){
       window.history.back();
