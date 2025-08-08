@@ -1,5 +1,8 @@
 # Changelog
 
+### v0.0.13 (08/08/2025)
+- Remove `tabs` permission
+
 ### v0.0.12 (22/09/2020)
 - Add support to new home page html tag
 - Allow navigation in playlist items

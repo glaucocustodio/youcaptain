@@ -1,6 +1,6 @@
 {
   "name": "YouCaptain",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Enables keyboard navigation on YouTube",
   "manifest_version": 2,
   "homepage_url": "https://github.com/glaucocustodio/youcaptain",
@@ -22,7 +22,7 @@
     "scripts": ["background.js"],
     "persistent": false
   },
-  "permissions": ["tabs", "storage"],
+  "permissions": ["storage"],
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",
