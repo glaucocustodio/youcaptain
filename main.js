@@ -1,32 +1,32 @@
-document.addEventListener('fullscreenchange', function(e){
+document.addEventListener('fullscreenchange', function(e) {
   // exit fullscreen
   if (!document.fullscreenElement) {
     runSpatial();
   }
 });
 
-var runSpatial = function(turnFullscreen = false){
+var runSpatial = function(turnFullscreen = false) {
   SpatialNavigation.makeFocusable();
   setFocus(turnFullscreen);
 }
 
-var markLikedVideo = function(){
+var markLikedVideo = function() {
   var likeButton = document.querySelectorAll('#top-level-buttons ytd-toggle-button-renderer')[0];
   var likeButtonActive = likeButton && likeButton.classList.contains('style-default-active');
 
-  if(likeButtonActive){
+  if (likeButtonActive) {
     document.querySelector('#player-container').style.borderLeft = 'solid 2px red';
   } else {
     player = document.querySelector('#player-container')
 
-    if(player) {
+    if (player) {
       player.style.borderLeft = '';
     }
   }
 }
 
 // mark new videos (loaded via ajax) as focusable
-setInterval(function(){
+setInterval(function() {
   SpatialNavigation.makeFocusable();
 
   markLikedVideo();
@@ -36,7 +36,7 @@ setInterval(function(){
 window.addEventListener('popstate', function(event) {
   runSpatial()
   // force focus
-  setTimeout(function(){
+  setTimeout(function() {
     setFocus();
   }, 200)
 });
@@ -56,8 +56,8 @@ window.addEventListener("ExtensionOptionsRead", function(event) {
   window.extensionOptions = event.detail
 })
 
-const defineMiniplayerSize = function(){
-  if(miniPlayer) {
+const defineMiniplayerSize = function() {
+  if (miniPlayer) {
     miniPlayer.style.setProperty('--ytd-miniplayer-width', '175px')
     miniPlayer.style.setProperty('height', '535px')
     miniPlayer.style.setProperty('--ytd-miniplayer-height', '88px')
@@ -112,20 +112,22 @@ const cancelArrowKeys = function() {
   document.addEventListener("keydown", cancelArrowHandler, true);
 }
 
-document.querySelector('ytd-app').addEventListener('yt-navigate-finish', function(e){
+document.querySelector('ytd-app').addEventListener('yt-navigate-finish', function(e) {
   document.removeEventListener("keydown", cancelArrowHandler)
   cancelArrowKeys()
   runSpatial(true)
 });
 
-var setFocus = function(turnFullscreen = false){
-  var check = function(){
-    var video = document.querySelector('video');
-    var videoActive = video && video.src != "";
-    if(videoActive && !miniPlayer){
+var setFocus = function(turnFullscreen = false) {
+  var check = function() {
+    const video = document.querySelector('video');
+    const videoActive = video && video.src != "";
+
+    if (videoActive && !miniPlayer) {
       SpatialNavigation.focus('ytd-player');
       window.scrollTo(0, 0);
-      if(turnFullscreen && window.extensionOptions.enterFullscreen){
+
+      if (turnFullscreen && window.extensionOptions.enterFullscreen) {
         document.documentElement.requestFullscreen();
       }
     } else {
@@ -139,54 +141,42 @@ window.addEventListener('load', function() {
   setDarkMode()
   cancelArrowKeys()
 
-  window.addEventListener("keydown", function(event){
-    var letter_o = 79;
-    var letter_u = 85;
-    var letter_s = 83;
-    var letter_y = 89;
-    var letter_h = 72;
-    var letter_w = 87;
-    var backspace = 8;
-    var f1 = 112;
-    var f2 = 113;
+  window.addEventListener("keydown", function(event) {
     var isCommentInputBox = document.activeElement.id == "contenteditable-root";
     // do nothing if:
     if (document.activeElement.tagName == 'INPUT' || isCommentInputBox) {
       return;
     }
-    if (event.keyCode == letter_u){
+
+    if (event.key == 'u') {
       setFocus();
-    } else if (event.keyCode == letter_o){
+    } else if (event.key == 'o') {
       // trigger this event to make the icons to appear
       const mouseenterEvent = new Event('mouseenter');
       event.target.dispatchEvent(mouseenterEvent);
 
       event.target.querySelectorAll('ytd-thumbnail-overlay-toggle-button-renderer').forEach((current) => {
-        if(current.innerText == 'ADD TO QUEUE' || current.getAttribute('aria-label') == "Add to queue"){
+        if (current.innerText == 'ADD TO QUEUE' || current.getAttribute('aria-label') == "Add to queue") {
           current.querySelector('yt-icon').click()
         }
       })
-    } else if (event.keyCode == letter_s){
-      document.querySelector('#search-input input').focus()
-      event.preventDefault();
-    } else if (event.keyCode == letter_y){
+    } else if (event.key == 'y') {
       window.location = '/';
-    } else if (event.keyCode == letter_w){
+    } else if (event.key == 'w') {
       window.location = '/playlist?list=WL';
-    } else if (event.keyCode == letter_h){
-      let likeButton = document.querySelector('#segmented-like-button yt-button-shape button');
-      likeButton && likeButton.click();
-    } else if (event.keyCode == backspace){
+    } else if (event.key == 'h') {
+      window.location = '/feed/history'
+    } else if (event.key == 'Backspace') {
       window.history.back();
-    } else if (event.keyCode == f1) {
+    } else if (event.key == 'F1') {
       // send message to content_script
       window.postMessage({ command: 'zoom_out', type: 'TO_BACKGROUND' })
-    } else if (event.keyCode == f2) {
+    } else if (event.key == 'F2') {
       window.postMessage({ command: 'zoom_in', type: 'TO_BACKGROUND' })
     }
   });
 
-  window.addEventListener('sn:focused', function(event){
+  window.addEventListener('sn:focused', function(event) {
     // keep focused element on center (avoid showing just part of a video's thumbnail when walking through a list of videos)
     event.srcElement.scrollIntoView({block: "center"})
 
@@ -195,9 +185,12 @@ window.addEventListener('load', function() {
     }
   })
 
-  window.addEventListener('sn:enter-down', function(event){
-    var link = event.target.querySelector('a.yt-simple-endpoint')
-    if(link) {
+  // on Enter down, click on the video link
+  window.addEventListener('sn:enter-down', function(event) {
+    // first for video thumb, second for like/dislike buttons, third for subscription button
+    const link = event.target.querySelector('a[href^="/watch"]') || event.target.querySelector('button') || event.target.querySelector('a.yt-simple-endpoint')
+
+    if (link) {
       var clickEvent = new MouseEvent('click', {
         bubbles: true,
         cancelable: true,
@@ -223,7 +216,7 @@ window.addEventListener('load', function() {
   */
   SpatialNavigation.add({
     id: 'yc-initial',
-    selector: 'ytd-rich-item-renderer, ytd-rich-grid-video-renderer, ytd-grid-video-renderer, ytd-video-renderer, ytd-compact-video-renderer, ytd-player, ytd-guide-entry-renderer, .ytd-video-primary-info-renderer ytd-toggle-button-renderer, ytd-video-owner-renderer, .paper-tab, #subscribe-button paper-button, yt-confirm-dialog-renderer yt-button-renderer, yt-confirm-dialog-renderer, ytd-mini-guide-entry-renderer, ytd-channel-renderer, paper-button.ytd-expander, ytd-comment-renderer, #content.ytd-playlist-video-renderer, ytd-playlist-panel-video-renderer'
+    selector: 'ytd-rich-item-renderer, ytd-rich-grid-video-renderer, ytd-grid-video-renderer, ytd-video-renderer, ytd-compact-video-renderer, ytd-player, ytd-guide-entry-renderer, .ytd-video-primary-info-renderer ytd-toggle-button-renderer, ytd-video-owner-renderer, .paper-tab, #subscribe-button paper-button, yt-confirm-dialog-renderer yt-button-renderer, yt-confirm-dialog-renderer, ytd-mini-guide-entry-renderer, ytd-channel-renderer, paper-button.ytd-expander, ytd-comment-renderer, #content.ytd-playlist-video-renderer, ytd-playlist-panel-video-renderer, yt-lockup-view-model, like-button-view-model, dislike-button-view-model'
   })
   // adds another section to avoid focus on the YT logo when accessing the home page
   SpatialNavigation.add({
