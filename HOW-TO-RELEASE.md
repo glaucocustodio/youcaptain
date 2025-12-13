@@ -7,3 +7,11 @@
 - choose the tag
 - write the changelog
 
+## Releasing on Chrome Web Store
+Once the release in created on Github
+
+- zip the folder `youcaptain`
+- go to https://chrome.google.com/u/1/webstore/devconsole
+- upload the zip folder
+- change the description if necessary
+- submit it for review
