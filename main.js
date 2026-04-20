@@ -120,11 +120,16 @@ document.querySelector('ytd-app').addEventListener('yt-navigate-finish', functio
 
 var setFocus = function(turnFullscreen = false) {
   var check = function() {
-    const video = document.querySelector('video');
-    const videoActive = video && video.src != "";
+    const watchPage = document.querySelector('ytd-app').attributes['is-watch-page'];
 
-    if (videoActive && !miniPlayer) {
-      SpatialNavigation.focus('ytd-player');
+    if (watchPage) {
+      const videoPlayer = document.querySelector('ytd-player');
+      if (videoPlayer) {
+        if (!videoPlayer.getAttribute('tabindex')) {
+          videoPlayer.setAttribute('tabindex', '-1');
+        }
+        videoPlayer.focus();
+      }
       window.scrollTo(0, 0);
 
       if (turnFullscreen && window.extensionOptions.enterFullscreen) {
