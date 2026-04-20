@@ -1,5 +1,14 @@
 # Changelog
 
+### v0.0.15 (20/04/2026)
+- Migrate extension to Chrome Manifest V3
+- Fix `u` shortcut
+
+### v0.0.14 (13/12/2025)
+- Fixes a few bugs when navigating around
+- Remove `s` shortcut
+- Change `h` shortcut so it takes the user to the history page
+
 ### v0.0.13 (08/08/2025)
 - Remove `tabs` permission
 
