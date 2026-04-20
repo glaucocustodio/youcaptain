@@ -2,7 +2,7 @@
   "name": "YouCaptain",
   "version": "0.0.14",
   "description": "Enables keyboard navigation on YouTube",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "homepage_url": "https://github.com/glaucocustodio/youcaptain",
   "content_scripts": [
     {
@@ -16,13 +16,15 @@
     "page": "options.html"
   },
   "web_accessible_resources": [
-    "spatial_navigation.js","main.js", "button.wav"
+    {
+      "resources": ["spatial_navigation.js", "main.js", "button.wav"],
+      "matches": ["*://*.youtube.com/*"]
+    }
   ],
   "background": {
-    "scripts": ["background.js"],
-    "persistent": false
+    "service_worker": "background.js"
   },
-  "permissions": ["storage"],
+  "permissions": ["storage", "tabs"],
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",

@@ -16,7 +16,7 @@ window.addEventListener("message", function(event) {
         command: event.data.command
       });
     } else if (event.data.command == 'play_button_audio') {
-      var audio = new Audio(chrome.extension.getURL('button.wav'));
+      var audio = new Audio(chrome.runtime.getURL('button.wav'));
       audio.play();
     }
   }
@@ -24,14 +24,14 @@ window.addEventListener("message", function(event) {
 
 
 var s = document.createElement('script');
-s.src = chrome.extension.getURL('spatial_navigation.js');
+s.src = chrome.runtime.getURL('spatial_navigation.js');
 (document.head||document.documentElement).appendChild(s);
 s.onload = function() {
     s.parentNode ? s.parentNode.removeChild(s) : null;
 };
 
 var s = document.createElement('script');
-s.src = chrome.extension.getURL('main.js');
+s.src = chrome.runtime.getURL('main.js');
 (document.head||document.documentElement).appendChild(s);
 s.onload = function() {
     s.parentNode ? s.parentNode.removeChild(s) : null;
